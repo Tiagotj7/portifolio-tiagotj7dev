@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
-// @ts-expect-error AOS CSS module not typed
 import 'aos/dist/aos.css';
 import emailjs from '@emailjs/browser';
+
 
 import gitlogo from './assets/git_dev.png';
 import linklogo from './assets/link_dev.png';
@@ -171,7 +171,7 @@ export default function Home() {
         <div className='hero-v2'>
           {/* Coluna esquerda — texto */}
           <div className='hero-v2-text' data-aos="fade-up">
-            <div className='section-eyebrow hero-eyebrow-v2'>DESENVOLVEDOR FRONT-END &amp; CIBERSEGURANÇA</div>
+            <div className='section-eyebrow hero-eyebrow-v2'>DESENVOLVEDOR FULL STACK &amp; CIBERSEGURANÇA</div>
             <h1 className='hero-title-v2'>
               <span className='hero-title-line'>Construo interfaces.</span>
               <span className='hero-title-gradient'>Protejo<br />sistemas.</span>
@@ -194,7 +194,7 @@ export default function Home() {
               </span>
               <span className='hero-badge'>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
-                Front-end &amp; Software
+                Full Stack
               </span>
               <span className='hero-badge'>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
