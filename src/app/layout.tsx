@@ -1,12 +1,9 @@
 // app/layout.tsx
 import './globals.css'
-import { Orbitron } from 'next/font/google'
-
-const orbitron = Orbitron({ subsets: ['latin'], weight: ['400', '700'] });
 
 export const metadata = {
-  title: 'Portfólio Tiago Carvalho',
-  description: 'Portfólio pessoal de Tiago Carvalho - Desenvolvedor Front-End e Software',
+  title: 'Tiago Carvalho — Dev Front-End & Cibersegurança',
+  description: 'Portfólio pessoal de Tiago Carvalho - Desenvolvedor Front-End e de Software, com foco em cibersegurança.',
 }
 
 export default function RootLayout({
@@ -16,7 +13,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={orbitron.className}>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   )
 }
