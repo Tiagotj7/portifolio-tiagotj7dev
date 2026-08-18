@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
-// @ts-expect-error
+// @ts-expect-error AOS CSS module not typed
 import 'aos/dist/aos.css';
 import emailjs from '@emailjs/browser';
 
