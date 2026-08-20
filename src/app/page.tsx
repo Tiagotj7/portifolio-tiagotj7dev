@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -21,9 +21,9 @@ import {
 
 // CONFIGURAÇÃO DO EMAILJS - SUBSTITUA PELOS SEUS DADOS
 const EMAILJS_CONFIG = {
-  serviceId: 'service_ru7swxa',    // Substitua pelo seu Service ID
-  templateId: 'template_mdy70wm',   // Substitua pelo seu Template ID
-  publicKey: 'Tg4sjZ-iNTZ_Hrr03'     // Substitua pela sua Public Key
+  serviceId: 'service_hpttzh4',    // Substitua pelo seu Service ID
+  templateId: 'template_wt8m61q',   // Substitua pelo seu Template ID
+  publicKey: 'znVsgGSdOgZZ4fmTl'     // Substitua pela sua Public Key
 };
 
 const CERTS = [
@@ -105,12 +105,36 @@ const PROJETOS: { title: string; category: string; desc: string; stack: string[]
 
 export default function Home() {
 
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
   useEffect(() => {
     AOS.init({
-      duration: 900,
-      once: true,
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: false,   // reanima os elementos toda vez que entram na tela
+      mirror: true,  // também anima ao subir (scroll para cima)
     });
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+      setScrollProgress(progress);
+      setShowBackToTop(scrollTop > 480);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -159,6 +183,11 @@ export default function Home() {
 
   return (
     <div className='App'>
+      {/* Barra de progresso de scroll */}
+      <div className='scroll-progress-track'>
+        <div className='scroll-progress-bar' style={{ width: `${scrollProgress}%` }}></div>
+      </div>
+
       {/* Nav pill flutuante */}
       <header className="App-header">
         <div className='nav-pill'>
@@ -208,15 +237,15 @@ export default function Home() {
               </a>
             </div>
             <div className='hero-badges-v2'>
-              <span className='hero-badge'>
+              <span className='hero-badge' data-aos="zoom-in" data-aos-delay={0}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
                 Alagoinhas, BA
               </span>
-              <span className='hero-badge'>
+              <span className='hero-badge' data-aos="zoom-in" data-aos-delay={90}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
                 Full Stack
               </span>
-              <span className='hero-badge'>
+              <span className='hero-badge' data-aos="zoom-in" data-aos-delay={180}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
                 Foco em Cibersegurança
               </span>
@@ -262,8 +291,16 @@ export default function Home() {
 
             </p>
             <div className='skills-row'>
-              {SKILLS.map((skill) => (
-                <span className='skill-chip' key={skill}>{skill}</span>
+              {SKILLS.map((skill, i) => (
+                <span
+                  className='skill-chip'
+                  key={skill}
+                  data-aos="zoom-in"
+                  data-aos-delay={i * 40}
+                  data-aos-duration="500"
+                >
+                  {skill}
+                </span>
               ))}
             </div>
           </div>
@@ -277,8 +314,8 @@ export default function Home() {
           <h1 className='section-heading'>Stack e frentes de atuação</h1>
           <p className='section-lead'>Passe o mouse (ou toque) em cada faixa para ver do que se trata.</p>
 
-          <div className='gallery-strip' data-aos="fade-up">
-            {CAPACITACOES.map((item) => {
+          <div className='gallery-strip'>
+            {CAPACITACOES.map((item, i) => {
               const Icon = item.icon;
               const Icon2 = item.icon2;
               return (
@@ -287,6 +324,9 @@ export default function Home() {
                   key={item.name}
                   style={{ ['--item-from' as string]: item.from, ['--item-to' as string]: item.to }}
                   tabIndex={0}
+                  data-aos="fade-up"
+                  data-aos-delay={i * 60}
+                  data-aos-duration="500"
                 >
                   <span className='gallery-item-icon'>
                     <Icon />
@@ -464,6 +504,17 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Botão flutuante voltar ao topo */}
+      <button
+        className={`back-to-top ${showBackToTop ? 'is-visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Voltar ao topo"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="18 15 12 9 6 15" />
+        </svg>
+      </button>
     </div>
   );
 }
