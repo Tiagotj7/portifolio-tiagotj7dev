@@ -11,6 +11,13 @@ import linklogo from './assets/link_dev.png';
 import instalogo from './assets/insta_logo_dev.png';
 import heroPortrait from './assets/hero-portrait.png';
 import aboutPortrait from './assets/about-portrait.jpg';
+import type { IconType } from 'react-icons';
+import {
+  FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaPython, FaPhp, FaLinux, FaShieldAlt, FaWordpress, FaBug,
+} from 'react-icons/fa';
+import {
+  SiJavascript, SiTypescript, SiNextdotjs, SiNestjs, SiMysql, SiPostgresql, SiFirebase, SiSupabase,
+} from 'react-icons/si';
 
 // CONFIGURAÇÃO DO EMAILJS - SUBSTITUA PELOS SEUS DADOS
 const EMAILJS_CONFIG = {
@@ -32,23 +39,32 @@ const CERTS = [
   { text: 'Formação DIO.me', tag: '// bootcamp' },
 ];
 
-const SKILLS = ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Python', 'C', 'PHP', 'WordPress'];
+const SKILLS = [
+  'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'NestJS',
+  'Python', 'C', 'C++', 'PHP', 'MySQL', 'PostgreSQL', 'Firebase', 'Supabase', 'Linux', 'WordPress',
+];
 
 // Efeito "galeria expansiva" — inspirado no modelo de galeria CSS que você mandou
-const CAPACITACOES = [
-  { name: 'HTML5', desc: 'Estrutura semântica e acessível para a web.', from: '#e2431c', to: '#5c130c' },
-  { name: 'CSS3', desc: 'Layout, animações e responsividade.', from: '#5b6b78', to: '#23292e' },
-  { name: 'JavaScript', desc: 'Interatividade e lógica no front-end.', from: '#ffb65c', to: '#c9491c' },
-  { name: 'TypeScript', desc: 'Tipagem estática para código mais seguro.', from: '#8fa1ad', to: '#3d474e' },
-  { name: 'React', desc: 'Interfaces componentizadas e reativas.', from: '#ff7a33', to: '#7a1710' },
-  { name: 'Python', desc: 'Automação, scripts e back-end.', from: '#5b6b78', to: '#17110c' },
-  { name: 'PHP', desc: 'Back-end e integração com WordPress.', from: '#ffb65c', to: '#5c130c' },
-  { name: 'Cibersegurança', desc: 'Pentest, hardening e boas práticas.', from: '#d43c1a', to: '#0a0a0b' },
+const CAPACITACOES: { name: string; desc: string; from: string; to: string; icon: IconType; icon2?: IconType }[] = [
+  { name: 'HTML5', desc: 'Estrutura semântica e acessível para a web.', from: '#e2431c', to: '#5c130c', icon: FaHtml5 },
+  { name: 'CSS3', desc: 'Layout, animações e responsividade.', from: '#5b6b78', to: '#23292e', icon: FaCss3Alt },
+  { name: 'JavaScript', desc: 'Interatividade e lógica no front-end.', from: '#ffb65c', to: '#c9491c', icon: SiJavascript },
+  { name: 'TypeScript', desc: 'Tipagem estática para código mais seguro.', from: '#8fa1ad', to: '#3d474e', icon: SiTypescript },
+  { name: 'React', desc: 'Interfaces componentizadas e reativas.', from: '#ff7a33', to: '#7a1710', icon: FaReact },
+  { name: 'Next.js', desc: 'Aplicações React com SSR, rotas e performance.', from: '#8fa1ad', to: '#101316', icon: SiNextdotjs },
+  { name: 'Node.js', desc: 'APIs e serviços back-end em JavaScript.', from: '#5b6b78', to: '#101316', icon: FaNodeJs },
+  { name: 'NestJS', desc: 'Back-end estruturado e escalável em TypeScript.', from: '#c9491c', to: '#2a1208', icon: SiNestjs },
+  { name: 'Python', desc: 'Automação, scripts e back-end.', from: '#5b6b78', to: '#17110c', icon: FaPython },
+  { name: 'PHP', desc: 'Back-end e integração com WordPress.', from: '#ffb65c', to: '#5c130c', icon: FaPhp },
+  { name: 'Bancos de Dados', desc: 'Modelagem e consultas com MySQL e PostgreSQL.', from: '#ffb65c', to: '#3d2410', icon: SiMysql, icon2: SiPostgresql },
+  { name: 'Firebase & Supabase', desc: 'Backend as a service, auth e banco em nuvem.', from: '#ff7a33', to: '#3a1208', icon: SiFirebase, icon2: SiSupabase },
+  { name: 'Linux', desc: 'Administração, automação e hardening de servidores.', from: '#d43c1a', to: '#0a0a0b', icon: FaLinux },
+  { name: 'Cibersegurança', desc: 'Pentest, hardening e boas práticas.', from: '#d43c1a', to: '#0a0a0b', icon: FaShieldAlt },
 ];
 
 // Efeito "flip card" — inspirado no modelo de card CSS que você mandou.
 // Substitua pelos seus projetos reais (título, descrição, stack e link).
-const PROJETOS = [
+const PROJETOS: { title: string; category: string; desc: string; stack: string[]; link: string; from: string; to: string; icon: IconType }[] = [
   {
     title: 'Portfólio Pessoal',
     category: 'Front-end · Next.js',
@@ -56,6 +72,7 @@ const PROJETOS = [
     stack: ['Next.js', 'TypeScript', 'CSS'],
     link: 'https://github.com/Tiagotj7/',
     from: '#ff7a33', to: '#7a1710',
+    icon: SiNextdotjs,
   },
   {
     title: 'Painel de Gestão',
@@ -64,6 +81,7 @@ const PROJETOS = [
     stack: ['React', 'JavaScript', 'API REST'],
     link: 'https://github.com/Tiagotj7/',
     from: '#5b6b78', to: '#23292e',
+    icon: FaReact,
   },
   {
     title: 'Landing Page Institucional',
@@ -72,6 +90,7 @@ const PROJETOS = [
     stack: ['WordPress', 'PHP', 'CSS'],
     link: 'https://github.com/Tiagotj7/',
     from: '#8fa1ad', to: '#3d474e',
+    icon: FaWordpress,
   },
   {
     title: 'Ferramenta de Pentest',
@@ -80,6 +99,7 @@ const PROJETOS = [
     stack: ['Python', 'Linux', 'Segurança'],
     link: 'https://github.com/Tiagotj7/',
     from: '#ffb65c', to: '#d43c1a',
+    icon: FaBug,
   },
 ];
 
@@ -258,20 +278,28 @@ export default function Home() {
           <p className='section-lead'>Passe o mouse (ou toque) em cada faixa para ver do que se trata.</p>
 
           <div className='gallery-strip' data-aos="fade-up">
-            {CAPACITACOES.map((item) => (
-              <div
-                className='gallery-item'
-                key={item.name}
-                style={{ ['--item-from' as string]: item.from, ['--item-to' as string]: item.to }}
-                tabIndex={0}
-              >
-                <span className='gallery-item-label'>{item.name}</span>
-                <div className='gallery-item-detail'>
-                  <strong>{item.name}</strong>
-                  <p>{item.desc}</p>
+            {CAPACITACOES.map((item) => {
+              const Icon = item.icon;
+              const Icon2 = item.icon2;
+              return (
+                <div
+                  className='gallery-item'
+                  key={item.name}
+                  style={{ ['--item-from' as string]: item.from, ['--item-to' as string]: item.to }}
+                  tabIndex={0}
+                >
+                  <span className='gallery-item-icon'>
+                    <Icon />
+                    {Icon2 && <Icon2 />}
+                  </span>
+                  <span className='gallery-item-label'>{item.name}</span>
+                  <div className='gallery-item-detail'>
+                    <strong>{item.name}</strong>
+                    <p>{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -292,6 +320,7 @@ export default function Home() {
                     style={{ background: `linear-gradient(155deg, ${proj.from}, ${proj.to})` }}
                   >
                     <span className='project-category'>{proj.category}</span>
+                    <proj.icon className='project-icon' />
                     <div>
                       <h3 className='project-title'>{proj.title}</h3>
                       <span className='project-hint'>toque para ver detalhes →</span>
