@@ -107,6 +107,9 @@ export default function Home() {
 
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const closeSidebar = () => setSidebarOpen(false);
 
   useEffect(() => {
     AOS.init({
@@ -207,13 +210,64 @@ export default function Home() {
             <li><a href="#projetos">Projetos</a></li>
             <li><a href="#certificados">Certificados</a></li>
           </ul>
-          <a href="#contato" className='nav-cta-ghost'>
+          <a href="#contato" className='nav-cta-ghost nav-cta-desktop'>
             <span className='nav-cta-dot'></span>
             Contato
             <span className='nav-cta-arrow'>→</span>
           </a>
+          {/* Botão hamburguer — só aparece em mobile */}
+          <button
+            className={`nav-hamburger${sidebarOpen ? ' nav-hamburger--open' : ''}`}
+            onClick={() => setSidebarOpen(prev => !prev)}
+            aria-label="Abrir menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </header>
+
+      {/* Sidebar mobile */}
+      <div className={`sidebar-overlay${sidebarOpen ? ' sidebar-overlay--visible' : ''}`} onClick={closeSidebar} />
+      <aside className={`sidebar${sidebarOpen ? ' sidebar--open' : ''}`}>
+        <div className='sidebar-header'>
+          <span className='nav-brand-icon'>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M9 6L4 12L9 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M15 6L20 12L15 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <span className='sidebar-brand-name'>tiagotj7.dev</span>
+          <button className='sidebar-close' onClick={closeSidebar} aria-label="Fechar menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <nav className='sidebar-nav'>
+          <a href="#inicio" className='sidebar-link' onClick={closeSidebar}>
+            <span className='sidebar-link-num'>01</span>Início
+          </a>
+          <a href="#sobre" className='sidebar-link' onClick={closeSidebar}>
+            <span className='sidebar-link-num'>02</span>Sobre
+          </a>
+          <a href="#capacitacoes" className='sidebar-link' onClick={closeSidebar}>
+            <span className='sidebar-link-num'>03</span>Capacitações
+          </a>
+          <a href="#projetos" className='sidebar-link' onClick={closeSidebar}>
+            <span className='sidebar-link-num'>04</span>Projetos
+          </a>
+          <a href="#certificados" className='sidebar-link' onClick={closeSidebar}>
+            <span className='sidebar-link-num'>05</span>Certificados
+          </a>
+        </nav>
+        <a href="#contato" className='sidebar-cta' onClick={closeSidebar}>
+          <span className='nav-cta-dot'></span>
+          Contato
+          <span className='nav-cta-arrow'>→</span>
+        </a>
+      </aside>
 
       {/* Apresentação */}
       <main className='main-content' id='inicio'>
